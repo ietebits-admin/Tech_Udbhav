@@ -70,7 +70,7 @@ export default function Navbar() {
         root: null,
         rootMargin: "-30% 0px -45% 0px",
         threshold: [0.2, 0.35, 0.5, 0.7],
-      },
+      }
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -86,10 +86,10 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed left-1/2 top-4 z-[150] w-[92%] max-w-fit -translate-x-1/2 md:top-6">
+    <header className="fixed left-1/2 top-4 z-[150] w-[95%] max-w-[1200px] -translate-x-1/2 md:top-6 md:w-auto">
       <nav
         className="
-          relative flex items-center justify-between gap-4
+          relative flex items-center justify-between
           rounded-full border border-white/10
           bg-black/35 px-4 py-2 backdrop-blur-xl
           shadow-[0_8px_32px_0_rgba(0,0,0,0.35)]
@@ -162,7 +162,7 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => setIsOpen((prev) => !prev)}
-          className="p-2 text-white/80 transition-colors hover:text-red-500 md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-red-500 md:hidden"
           aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={isOpen}
         >
@@ -184,17 +184,17 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10, scale: 0.96 }}
+            initial={{ opacity: 0, y: -10, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -10, scale: 0.96 }}
+            exit={{ opacity: 0, y: -10, scale: 0.98 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
             className="
-              absolute left-0 right-0 top-full mt-3 origin-top rounded-3xl
-              border border-white/10 bg-black/45 p-4 backdrop-blur-2xl
+              absolute left-0 right-0 top-full mt-3 origin-top rounded-[2rem]
+              border border-white/10 bg-black/60 p-2 backdrop-blur-2xl
               shadow-2xl md:hidden
             "
           >
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1">
               {items.map((item) => {
                 const isActive = activeHash === item.href;
 
@@ -204,21 +204,19 @@ export default function Navbar() {
                     href={item.href}
                     onClick={() => handleNavClick(item.href)}
                     className={`
-                      flex w-full items-center justify-between rounded-2xl px-4 py-4
+                      flex w-full items-center gap-4 rounded-2xl px-5 py-4
                       transition-all duration-200
                       ${
                         isActive
-                          ? "bg-red-600/12 text-red-400 ring-1 ring-red-500/30"
+                          ? "bg-red-600/20 text-red-400 ring-1 ring-red-500/30"
                           : "text-white/80 hover:bg-white/5 hover:text-red-500"
                       }
                     `}
                     aria-label={`Go to ${item.label.toLowerCase()} section`}
                   >
-                    <span className="flex items-center gap-3">
-                      <span>{item.icon}</span>
-                      <span className="text-[0.75rem] font-bold uppercase tracking-[0.35em]">
-                        {item.label}
-                      </span>
+                    <span className="flex-shrink-0">{item.icon}</span>
+                    <span className="text-[0.8rem] font-semibold uppercase tracking-[0.2em]">
+                      {item.label}
                     </span>
                   </a>
                 );
