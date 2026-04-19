@@ -4,35 +4,35 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const EVENT_CARDS = [
-  {
-    id: 1,
-    tag: "Day 1",
-    title: "OPENING CEREMONY",
-    subtitle: "THE RIFT OPENS",
-    description:
-      "Witness the grand inauguration as the gates between worlds tear open. Flashmobs, fire acts, and a DJ set that will shake Hawkins to its core.",
-    rating: null,
-    genre: null,
-    age: null,
-    thumb: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=80",
-  },
+    {
+        id: 1,
+        tag: "Event 001",
+        title: "ROBO SOCCER",
+        subtitle: "MECHANIZED MADNESS",
+        description:
+          "Teams of autonomous bots face off in a high-octane soccer showdown. Who will claim victory in this mechanical mayhem?",
+        rating: null,
+        genre: null,
+        age: null,
+        thumb: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80",
+      },
   {
     id: 2,
-    tag: "Day 1",
-    title: "HACKATHON",
+    tag: "Event 010",
+    title: "CLOAK CODING",
     subtitle: "CODE THE UPSIDE DOWN",
     description:
-      "36 hours. No sleep. Build something that defies reality. Top teams battle it out for prizes worth ₹1,00,000+.",
-    rating: "4.8",
-    genre: "Technical",
-    age: "16+",
+      "In the shadows of the Upside Down, code becomes a weapon. Hidden minds compete in a battle where only the unseen logic survives.",
+      rating: null,
+      genre: null,
+      age: null,
     thumb: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80",
   },
   {
     id: 3,
-    tag: "Event 001",
-    title: "ROBO SOCCER",
-    subtitle: "MECHANIZED MADNESS",
+    tag: "Event 011",
+    title: "MINEFIELD RESCUE",
+    subtitle: "ROBOTIC RESCUE OPS",
     description:
       "Teams of autonomous bots face off in a high-octane soccer showdown. Who will claim victory in this mechanical mayhem?",
     rating: null,
@@ -42,35 +42,32 @@ const EVENT_CARDS = [
   },
   {
     id: 4,
-    tag: "Day 2",
-    title: "ROBOTICS ARENA",
-    subtitle: "MACHINES AWAKENED",
-    description:
-      "Autonomous bots collide in a neon-lit arena. May the strongest machine survive the Demogorgon's gauntlet.",
-    rating: "4.7",
-    genre: "Technical",
-    age: "16+",
+    tag: "Event 100",
+    title: "COMING SOON",
+    subtitle: "DARK SIGNAL",
+    description:"Something is coming… and it’s not from this world. The gate is weakening. Stay ready.",
+    rating: null,
+    genre: null,
+    age: null,
     thumb: "https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?w=600&q=80",
   },
   {
     id: 5,
-    tag: "Day 2",
-    title: "CULTURAL NIGHT",
-    subtitle: "ECHOES FROM THE VOID",
-    description:
-      "Music, dance, and performance art converge in a night that blurs the line between dimensions. An evening you will never forget.",
-    rating: "4.9",
-    genre: "Cultural",
-    age: "All ages",
+    tag: "Event 101",
+    title: "COMING SOON",
+    subtitle: "DARK SIGNAL",
+    description:"Something is coming… and it’s not from this world. The gate is weakening. Stay ready.",
+    rating: null,
+    genre: null,
+    age: null,
     thumb: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&q=80",
   },
   {
     id: 6,
-    tag: "Day 3",
-    title: "CLOSING CEREMONY",
-    subtitle: "THE RIFT SEALS",
-    description:
-      "The finale. Winners crowned, memories made, and the rift closes — until next time. Join us for the grand send-off.",
+    tag: "Event 110",
+    title: "COMING SOON",
+    subtitle: "DARK SIGNAL",
+    description:"Something is coming… and it’s not from this world. The gate is weakening. Stay ready.",
     rating: null,
     genre: null,
     age: null,
@@ -134,8 +131,6 @@ export default function EventDescription() {
     setDir(idx > active ? 1 : -1);
     setActive(idx);
   };
-  const prev = () => go((active - 1 + EVENT_CARDS.length) % EVENT_CARDS.length);
-  const next = () => go((active + 1) % EVENT_CARDS.length);
 
   const card = EVENT_CARDS[active];
 
@@ -194,7 +189,29 @@ export default function EventDescription() {
 
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-8 md:px-12 pt-8 pb-16 md:pt-12 md:pb-16">
 
-        
+        <div className="mb-8 md:mb-10 flex flex-col items-start select-none">
+          <h2
+            className="font-black uppercase mb-4 tracking-[-0.02em]"
+            style={{
+              backgroundImage: "url('/red.png')",
+              backgroundSize: "cover",
+              WebkitBackgroundClip: "text",
+              color: "transparent",
+              fontSize: "clamp(2.5rem, 8vw, 4.5rem)",
+              fontFamily: "'Georgia', serif",
+            }}
+          >
+            Event Overview
+          </h2>
+          <div
+            className="h-[2px] w-24"
+            style={{
+              background: "#dc2626",
+              boxShadow: "0 0 10px rgba(220,38,38,0.5)",
+            }}
+          />
+        </div>
+
         <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-10">
 
           <div className="flex-1 min-w-0 flex flex-col gap-4 select-none order-2 md:order-1 md:pt-2">
@@ -335,6 +352,8 @@ export default function EventDescription() {
                   boxShadow: "0 0 20px rgba(220,38,38,0.12), 0 16px 44px rgba(0,0,0,0.85)",
                 }}
               >
+                
+
                 <AnimatePresence mode="wait" custom={dir}>
                   <motion.div key={card.id + "pi"}
                     initial={{ opacity: 0, scale: 1.04 }}
@@ -343,7 +362,7 @@ export default function EventDescription() {
                     transition={{ duration: 0.36, ease: "easeOut" }}
                     className="absolute inset-0">
                     <img
-                      src={card.thumb}
+                      src="/comingsoon.png"
                       alt={card.title}
                       className="w-full h-full object-cover"
                       style={{ filter: "brightness(0.5) saturate(0.65)" }}
@@ -370,7 +389,7 @@ export default function EventDescription() {
                       opacity: i === active ? 1 : 0.4,
                       transform: i === active ? "scale(1)" : "scale(0.96)",
                     }}>
-                    <img src={c.thumb} alt={c.title} className="w-full h-full object-cover"
+                    <img src="/tu_logo.png" alt={c.title} className="w-full h-full object-cover"
                       style={{ filter: "brightness(0.38) saturate(0.45)" }} />
                     {i === active && (
                       <div className="absolute inset-0" style={{ background: "rgba(220,38,38,0.08)" }} />
@@ -397,6 +416,15 @@ export default function EventDescription() {
                   boxShadow: "0 0 16px rgba(220,38,38,0.1), 0 10px 30px rgba(0,0,0,0.8)",
                 }}
               >
+                <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                  <img
+                    src="/tu_logo.png"
+                    alt="TU Logo"
+                    className="w-14 h-14 object-contain opacity-75"
+                    style={{ filter: "drop-shadow(0 0 8px rgba(220,38,38,0.4))" }}
+                  />
+                </div>
+
                 <AnimatePresence mode="wait" custom={dir}>
                   <motion.div key={card.id + "mi"}
                     initial={{ opacity: 0 }}
@@ -404,7 +432,7 @@ export default function EventDescription() {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.32, ease: "easeOut" }}
                     className="absolute inset-0">
-                    <img src={card.thumb} alt={card.title}
+                    <img src="/comingsoon.png" alt={card.title}
                       className="w-full h-full object-cover"
                       style={{ filter: "brightness(0.48) saturate(0.6)" }} />
                     <div className="absolute inset-0" style={{ background: "rgba(70,0,0,0.28)", mixBlendMode: "multiply" }} />
@@ -433,7 +461,7 @@ export default function EventDescription() {
                       boxShadow: i === active ? "0 0 6px rgba(220,38,38,0.2)" : "none",
                       opacity: i === active ? 1 : 0.38,
                     }}>
-                    <img src={c.thumb} alt={c.title} className="w-full h-full object-cover"
+                    <img src="/comingsoon.png" alt={c.title} className="w-full h-full object-cover"
                       style={{ filter: "brightness(0.36) saturate(0.45)" }} />
                     {i === active && (
                       <div className="absolute inset-0" style={{ background: "rgba(220,38,38,0.09)" }} />
@@ -446,6 +474,19 @@ export default function EventDescription() {
                       {String(c.id).padStart(2, "0")}
                     </div>
                   </button>
+                ))}
+              </div>
+
+              <div className="flex justify-center gap-1.5 mt-1">
+                {EVENT_CARDS.map((_, i) => (
+                  <button key={i} onClick={() => go(i)}
+                    className="rounded-full transition-all duration-300"
+                    style={{
+                      width: i === active ? "18px" : "5px",
+                      height: "5px",
+                      background: i === active ? "#dc2626" : "rgba(255,255,255,0.2)",
+                    }}
+                  />
                 ))}
               </div>
             </div>
@@ -532,45 +573,8 @@ export default function EventDescription() {
         </div>
       </div>
 
-      <button
-        onClick={prev}
-        className="fixed z-30 flex items-center justify-center rounded-full transition-all duration-200 hover:scale-110 active:scale-95"
-        style={{
-          left: "clamp(8px,3vw,20px)",
-          top: "50%",
-          transform: "translateY(-50%)",
-          width: "clamp(30px,8vw,38px)",
-          height: "clamp(30px,8vw,38px)",
-          background: "rgba(6,6,6,0.88)",
-          border: "1px solid rgba(220,38,38,0.28)",
-          color: "#ef4444",
-          fontSize: "clamp(13px,3.5vw,17px)",
-          backdropFilter: "blur(6px)",
-        }}
-      >
-        ‹
-      </button>
-      <button
-        onClick={next}
-        className="fixed z-30 flex items-center justify-center rounded-full transition-all duration-200 hover:scale-110 active:scale-95"
-        style={{
-          right: "clamp(8px,3vw,20px)",
-          top: "50%",
-          transform: "translateY(-50%)",
-          width: "clamp(30px,8vw,38px)",
-          height: "clamp(30px,8vw,38px)",
-          background: "rgba(6,6,6,0.88)",
-          border: "1px solid rgba(220,38,38,0.28)",
-          color: "#ef4444",
-          fontSize: "clamp(13px,3.5vw,17px)",
-          backdropFilter: "blur(6px)",
-        }}
-      >
-        ›
-      </button>
-
       <div
-        className="fixed bottom-4 left-1/2 z-30 flex gap-1.5 rounded-full px-3 py-1.5"
+        className="hidden md:flex fixed bottom-4 left-1/2 z-30 gap-1.5 rounded-full px-3 py-1.5"
         style={{
           transform: "translateX(-50%)",
           background: "rgba(0,0,0,0.55)",

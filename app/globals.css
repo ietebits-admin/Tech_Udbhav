@@ -18,8 +18,10 @@
 
 /* 🎬 Stranger Things Font */
 .stranger-font {
-  font-family: 'Benguiat Std ', serif;
-  letter-spacing: 2px;
+  font-family: 'Benguiat', serif;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 /* Optional: stronger cinematic feel */
 .stranger-glow {
