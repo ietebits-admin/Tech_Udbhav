@@ -60,6 +60,7 @@ const Description: React.FC<DescriptionProps> = ({ scrollProgress }) => {
       style={{ opacity, y }}
       className="relative min-h-screen w-full overflow-hidden flex items-center justify-center bg-[#080808] py-20"
     >
+    
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
@@ -135,7 +136,7 @@ const Description: React.FC<DescriptionProps> = ({ scrollProgress }) => {
             <div className="absolute -inset-4 bg-[#dc2626] opacity-[0.12] blur-3xl rounded-xl transition-opacity group-hover:opacity-[0.18]" />
             <div className="relative z-10">
               <img
-                src="/main_poster.png" 
+                src="/main_poster2.png" 
                 alt="Tech Udbhav Poster"
                 className="rounded-xl shadow-2xl w-full max-w-[380px] aspect-[3/4] object-contain bg-[#0a0a0a] border border-white/10"
                 style={{ filter: "brightness(0.9) contrast(1.1)" }}

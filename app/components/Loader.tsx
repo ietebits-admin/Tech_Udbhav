@@ -50,12 +50,19 @@ export default function Loader({ onFinish }: { onFinish: () => void }) {
 
       <video
         ref={videoRef}
-        src="/loader.mp4"
         autoPlay
         muted
         playsInline
         className="w-full h-full object-cover"
-      />
+      >
+        <source
+          src="/loader2.mp4"
+          media="(max-width: 650px)"
+        />
+        <source
+          src="/loader3.mp4"
+        />
+      </video>
     </div>
   );
 }

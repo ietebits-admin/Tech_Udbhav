@@ -29,7 +29,7 @@ export default function SponsorsSection() {
 
       <div className="flex flex-col items-center gap-2 mb-16 z-10 w-full">
         <p 
-          className="text-[10px] md:text-[12px] tracking-[0.5em] uppercase text-gray-500 font-medium"
+          className="text-[10px] md:text-[12px] tracking-[0.5em] uppercase text-gray-200 font-medium"
           style={{ fontFamily: "'Courier New', monospace" }}
         >
           We are proud to have
