@@ -12,57 +12,82 @@ export default function SponsorsSection() {
     "/sponsor6.png",
   ];
 
-
   const doubledSponsors = [...sponsors, ...sponsors];
 
   return (
     <section
-      className="w-full bg-black text-white flex flex-col items-center justify-center border-t border-white/10 px-6 py-20 overflow-hidden"
-      style={{ minHeight: "50vh" }}
+      className="w-full bg-black text-white flex flex-col items-center justify-center border-t border-white/10 px-6 py-20 overflow-hidden relative"
+      style={{ minHeight: "60vh" }}
     >
-      <div className="flex flex-col items-center gap-3 mb-16">
-        <p className="text-[10px] tracking-[0.45em] uppercase text-gray-500">
+      <div
+        className="pointer-events-none absolute top-0 left-0 right-0 z-0"
+        style={{
+          height: "200px",
+          background: "radial-gradient(ellipse 70% 100% at 50% 0%, rgba(255,0,0,0.2) 0%, transparent 70%)",
+        }}
+      />
+
+      <div className="flex flex-col items-center gap-2 mb-16 z-10 w-full">
+        <p 
+          className="text-[10px] md:text-[12px] tracking-[0.5em] uppercase text-gray-500 font-medium"
+          style={{ fontFamily: "'Courier New', monospace" }}
+        >
           We are proud to have
         </p>
-        <h2 className="text-2xl md:text-4xl font-bold tracking-widest uppercase text-white/90">
-          Our Previous Sponsors
+        
+        <h2 
+          className="text-3xl md:text-6xl font-black tracking-tighter uppercase text-center leading-tight"
+          style={{
+            backgroundImage: "url('/red.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            fontFamily: "'Georgia', serif",
+          }}
+        >
+          Our Previous <br className="md:hidden" /> Sponsors
         </h2>
-        <div className="h-px w-28 bg-white/20 mt-1" />
+        
+        <div 
+          className="h-[2px] w-24 md:w-32 bg-red-600 mt-2" 
+          style={{ boxShadow: "0 0 15px #ff0000" }} 
+        />
       </div>
 
-      <div className="relative w-full max-w-7xl">
-        
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black via-black/80 to-transparent z-10" />
-        
-        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black via-black/80 to-transparent z-10" />
+      <div className="relative w-full max-w-7xl z-10">
+        <div className="absolute inset-y-0 left-0 w-20 md:w-32 bg-gradient-to-r from-black via-black/80 to-transparent z-20" />
+        <div className="absolute inset-y-0 right-0 w-20 md:w-32 bg-gradient-to-l from-black via-black/80 to-transparent z-20" />
 
         <div className="flex overflow-hidden">
           <motion.div
-            className="flex gap-16 items-center whitespace-nowrap"
+            className="flex gap-12 md:gap-16 items-center whitespace-nowrap"
             animate={{
-              x: ["0%", "-50%"], 
+              x: ["0%", "-50%"],
             }}
             transition={{
               ease: "linear",
-              duration: 25, 
+              duration: 25,
               repeat: Infinity,
             }}
           >
             {doubledSponsors.map((src, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 w-32 md:w-44 flex justify-center items-center"
+                className="flex-shrink-0 w-28 md:w-44 flex justify-center items-center group"
               >
                 <img
                   src={src}
                   alt={`Sponsor ${index}`}
-                  className="max-w-full h-auto object-contain opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-500 cursor-pointer"
+                  className="max-w-full h-auto object-contain opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500 cursor-pointer"
                 />
               </div>
             ))}
           </motion.div>
         </div>
       </div>
+
+      <div className="pointer-events-none absolute inset-0 z-[5] bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.5)_100%)]" />
     </section>
   );
 }
