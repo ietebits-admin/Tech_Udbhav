@@ -1,57 +1,58 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const EventSlider = () => {
-  const [activeIndex, setActiveIndex] = useState(1);
-  const [scramble, setScramble] = useState("000");
+const EVENTS = [
+  { id: 0, code: "001" },
+  { id: 1, code: "010" },
+  { id: 2, code: "011" },
+  { id: 3, code: "100" },
+  { id: 4, code: "101" },
+] as const;
 
-  const events = [
-    { id: 0, code: "001" },
-    { id: 1, code: "010" },
-    { id: 2, code: "011" },
-    { id: 3, code: "100" },
-    { id: 4, code: "101" },
-  ];
+export default function EventSlider() {
+  const [activeIndex, setActiveIndex] = useState(1);
+  const [scramble, setScramble] = useState<string>(EVENTS[1].code);
 
   useEffect(() => {
-    let interval: any;
-    const chars = ["0", "1"];
+    const activeCode = EVENTS[activeIndex].code;
+    const chars = ["0", "1"] as const;
     let iterations = 0;
 
-    interval = setInterval(() => {
+    const intervalId: ReturnType<typeof setInterval> = setInterval(() => {
       setScramble(
-        events[activeIndex].code
+        activeCode
           .split("")
-          .map((_, i) => {
-            if (i < iterations) return events[activeIndex].code[i];
-            return chars[Math.floor(Math.random() * 2)];
+          .map((char, index) => {
+            if (index < iterations) return char;
+            return chars[Math.floor(Math.random() * chars.length)];
           })
-          .join("")
+          .join(""),
       );
 
       iterations += 0.5;
 
-      if (iterations >= events[activeIndex].code.length) {
-        clearInterval(interval);
-        setScramble(events[activeIndex].code);
+      if (iterations >= activeCode.length) {
+        clearInterval(intervalId);
+        setScramble(activeCode);
       }
     }, 50);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(intervalId);
   }, [activeIndex]);
 
-  const handleNext = () =>
-    setActiveIndex((prev) => (prev + 1) % events.length);
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % EVENTS.length);
+  };
 
-  const handlePrev = () =>
-    setActiveIndex((prev) => (prev - 1 + events.length) % events.length);
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + EVENTS.length) % EVENTS.length);
+  };
 
   return (
-    <div className="relative flex items-center justify-center w-full max-w-7xl h-[450px] md:h-[550px] overflow-hidden rounded-2xl border border-white/10">
-      
+    <div className="relative flex h-[450px] w-full max-w-7xl items-center justify-center overflow-hidden rounded-2xl border border-white/10 md:h-[550px]">
       <div
         className="absolute inset-0"
         style={{
@@ -65,23 +66,22 @@ const EventSlider = () => {
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.05)_0%,rgba(0,0,0,0.4)_75%)]" />
 
-      <div className="relative z-10 w-full h-full flex items-center justify-center">
-
+      <div className="relative z-10 flex h-full w-full items-center justify-center">
         <button
+          type="button"
           onClick={handlePrev}
-          className="absolute left-4 md:left-10 p-3 rounded-full bg-black/20 border border-white/20 backdrop-blur hover:scale-110 transition z-40"
+          aria-label="Previous event"
+          className="absolute left-4 z-40 rounded-full border border-white/20 bg-black/20 p-3 backdrop-blur transition hover:scale-110 md:left-10"
         >
           <ChevronLeft size={32} />
         </button>
 
-        {/* SLIDER */}
-        <div className="relative w-full flex items-center justify-center h-full -translate-y-4">
-          {events.map((event, index) => {
+        <div className="relative flex h-full w-full -translate-y-4 items-center justify-center">
+          {EVENTS.map((event, index) => {
             const isCenter = index === activeIndex;
             const isLeft =
-              index === (activeIndex - 1 + events.length) % events.length;
-            const isRight =
-              index === (activeIndex + 1) % events.length;
+              index === (activeIndex - 1 + EVENTS.length) % EVENTS.length;
+            const isRight = index === (activeIndex + 1) % EVENTS.length;
 
             if (!isCenter && !isLeft && !isRight) return null;
 
@@ -90,24 +90,22 @@ const EventSlider = () => {
                 key={event.id}
                 animate={{
                   scale: isCenter ? 1 : 0.85,
-                  x: isCenter ? 0 : isLeft ? -320 : 320, // 🔥 more spacing
+                  x: isCenter ? 0 : isLeft ? -320 : 320,
                   rotateY: isLeft ? 20 : isRight ? -20 : 0,
                 }}
                 transition={{ type: "spring", stiffness: 120, damping: 18 }}
-                className={`absolute w-[260px] md:w-[340px] h-[380px] md:h-[460px] ${
+                className={`absolute h-[380px] w-[260px] md:h-[460px] md:w-[340px] ${
                   isCenter ? "z-30" : "z-10"
                 }`}
               >
-                <div className="w-full h-full rounded-xl border border-white/10 bg-black/10 backdrop-blur-xs p-8 flex flex-col items-center text-center">
-
-                  <span className="text-xs tracking-widest text-red-500 mb-auto font-mono">
+                <div className="flex h-full w-full flex-col items-center rounded-xl border border-white/10 bg-black/10 p-8 text-center backdrop-blur-xs">
+                  <span className="mb-auto font-mono text-xs tracking-widest text-red-500">
                     EVENT {isCenter ? scramble : event.code}
                   </span>
 
-                  <h3 className="stranger-font text-3xl md:text-4xl uppercase text-red-500 stranger-glow">
+                  <h3 className="stranger-font stranger-glow text-3xl uppercase text-red-500 md:text-4xl">
                     COMING SOON
                   </h3>
-
                 </div>
               </motion.div>
             );
@@ -115,14 +113,14 @@ const EventSlider = () => {
         </div>
 
         <button
+          type="button"
           onClick={handleNext}
-          className="absolute right-4 md:right-10 p-3 rounded-full bg-black/20 border border-white/20 backdrop-blur hover:scale-110 transition z-40"
+          aria-label="Next event"
+          className="absolute right-4 z-40 rounded-full border border-white/20 bg-black/20 p-3 backdrop-blur transition hover:scale-110 md:right-10"
         >
           <ChevronRight size={32} />
         </button>
       </div>
     </div>
   );
-};
-
-export default EventSlider;
+}
