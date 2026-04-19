@@ -10,7 +10,7 @@ const EVENT_CARDS = [
         title: "ROBO SOCCER",
         subtitle: "MECHANIZED MADNESS",
         description:
-          "Teams of autonomous bots face off in a high-octane soccer showdown. Who will claim victory in this mechanical mayhem?",
+          "The arena flickers, bots clash, and survival decides the champion. In this high-stakes soccer battle, only the most cunning and agile machines will prevail.",
         rating: null,
         genre: null,
         age: null,
@@ -32,9 +32,9 @@ const EVENT_CARDS = [
     id: 3,
     tag: "Event 011",
     title: "MINEFIELD RESCUE",
-    subtitle: "ROBOTIC RESCUE OPS",
+    subtitle: "NAVIGATE FOR RESUCE",
     description:
-      "Teams of autonomous bots face off in a high-octane soccer showdown. Who will claim victory in this mechanical mayhem?",
+      "Bots navigate a minefield to rescue hostages before traps pull them into darkness. Precision, strategy, and nerves of steel are the only way out.",
     rating: null,
     genre: null,
     age: null,
@@ -76,12 +76,11 @@ const EVENT_CARDS = [
 ];
 
 const TIMELINE = [
-  { label: "Registrations", date: "May 1" },
-  { label: "Hackathon", date: "May 15" },
-  { label: "Robo Soccer", date: "May 16" },
-  { label: "Robotics", date: "May 17" },
-  { label: "Cultural Night", date: "May 17" },
-  { label: "Grand Finale", date: "May 18" },
+  { label: "Registrations", date: "Coming Soon" },
+  { label: "Coming Soon", date: "Coming Soon" },
+  { label: "Coming Soo", date: "Coming Soon" },
+  { label: "Coming Soon", date: "Coming Soon" },
+  { label: "Coming Soon", date: "Coming Soon" },
 ];
 
 const PARTICLES = Array.from({ length: 14 }, (_, i) => ({
