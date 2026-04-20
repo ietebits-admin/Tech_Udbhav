@@ -224,7 +224,7 @@ export default function Description() {
             <div className="absolute -inset-4 rounded-xl bg-[#dc2626] opacity-[0.12] blur-3xl transition-opacity group-hover:opacity-[0.18]" />
             <div className="relative z-10">
               <Image
-                src="/main_poster2.png"
+                src="/main_poster3.png"
                 alt="Tech Udbhav Poster"
                 width={380}
                 height={507}

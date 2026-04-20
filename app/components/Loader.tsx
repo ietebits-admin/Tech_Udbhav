@@ -108,7 +108,7 @@ export default function Loader({ onFinishAction }: LoaderProps) {
         preload="auto"
         className="h-full w-full object-cover"
       >
-        <source src="/loader2.mp4" media="(max-width: 650px)" />
+        <source src="/loader4.mp4" media="(max-width: 650px)" />
         <source src="/loader3.mp4" />
       </video>
 
