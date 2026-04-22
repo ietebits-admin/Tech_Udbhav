@@ -2,15 +2,15 @@
 
 import Image from "next/image";
 import {
-  FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
+  FaTwitter,
   FaYoutube,
   FaPhoneAlt,
 } from "react-icons/fa";
 
 const SOCIAL_LINKS = [
-  { icon: FaFacebookF, link: "https://x.com/IETE_BITS" },
+  { icon: FaTwitter, link: "https://x.com/IETE_BITS" },
   { icon: FaInstagram, link: "https://www.instagram.com/ietebits/" },
   { icon: FaLinkedinIn, link: "https://www.linkedin.com/company/iete-students-chapter-bit-sindri123/" },
   { icon: FaYoutube, link: "https://www.youtube.com/@IETEBITSindri" },
