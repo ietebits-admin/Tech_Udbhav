@@ -238,12 +238,7 @@ export default function Description() {
             <div className="absolute -right-3 -top-3 h-12 w-12 border-r-2 border-t-2 border-[#dc2626]/60" />
             <div className="absolute -bottom-3 -left-3 h-12 w-12 border-b-2 border-l-2 border-[#dc2626]/60" />
 
-            <div
-              className="absolute bottom-4 right-4 z-20 text-[9px] font-bold uppercase tracking-widest opacity-40"
-              style={{ color: "white", fontFamily: "'Courier New', monospace" }}
-            >
-              EST. 2026 // IETE-SF
-            </div>
+           
           </div>
         </div>
       </div>
