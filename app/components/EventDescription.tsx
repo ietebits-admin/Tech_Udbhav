@@ -14,7 +14,16 @@ const EVENT_CARDS = [
     rating: null,
     genre: null,
     age: null,
-    thumb: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80",
+    mainImage: "./robosoccer.png",
+    registerLink: "https://tally.so/r/EkBWZr",
+    ruleBookLink: "https://drive.google.com/file/d/1SL_Wm3wz56CChxmXZSr5WQ3JsSRHOZAJ/view?usp=drive_link",
+    timeline: [
+      { label: "Registrations", date: "Coming Soon" },
+      { label: "Qualifier", date: "Coming Soon" },
+      { label: "Semi Final", date: "Coming Soon" },
+      { label: "Final", date: "Coming Soon" },
+      { label: "Results", date: "Coming Soon" },
+    ],
   },
   {
     id: 2,
@@ -26,61 +35,98 @@ const EVENT_CARDS = [
     rating: null,
     genre: null,
     age: null,
-    thumb: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80",
+    mainImage: "/comingsoon.png",
+    registerLink: null,
+    ruleBookLink: null,
+    timeline: [
+      { label: "Registrations", date: "Coming Soon" },
+      { label: "Round 1", date: "Coming Soon" },
+      { label: "Round 2", date: "Coming Soon" },
+      { label: "Final", date: "Coming Soon" },
+      { label: "Results", date: "Coming Soon" },
+    ],
   },
   {
     id: 3,
     tag: "Event 011",
     title: "MINEFIELD RESCUE",
-    subtitle: "NAVIGATE FOR RESUCE",
+    subtitle: "NAVIGATE FOR RESCUE",
     description:
       "Bots navigate a minefield to rescue hostages before traps pull them into darkness. Precision, strategy, and nerves of steel are the only way out.",
     rating: null,
     genre: null,
     age: null,
-    thumb: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80",
+    mainImage: "/comingsoon.png",
+    registerLink: null,
+    ruleBookLink: null,
+    timeline: [
+      { label: "Registrations", date: "Coming Soon" },
+      { label: "Trial Run", date: "Coming Soon" },
+      { label: "Qualifier", date: "Coming Soon" },
+      { label: "Final", date: "Coming Soon" },
+      { label: "Results", date: "Coming Soon" },
+    ],
   },
   {
     id: 4,
     tag: "Event 100",
     title: "COMING SOON",
     subtitle: "DARK SIGNAL",
-    description: "Something is coming… and it’s not from this world. The gate is weakening. Stay ready.",
+    description: "Something is coming… and it's not from this world. The gate is weakening. Stay ready.",
     rating: null,
     genre: null,
     age: null,
-    thumb: "https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?w=600&q=80",
+    mainImage: "/comingsoon.png",
+    registerLink: null,
+    ruleBookLink: null,
+    timeline: [
+      { label: "Registrations", date: "Coming Soon" },
+      { label: "Coming Soon", date: "Coming Soon" },
+      { label: "Coming Soon", date: "Coming Soon" },
+      { label: "Coming Soon", date: "Coming Soon" },
+      { label: "Coming Soon", date: "Coming Soon" },
+    ],
   },
   {
     id: 5,
     tag: "Event 101",
     title: "COMING SOON",
     subtitle: "DARK SIGNAL",
-    description: "Something is coming… and it’s not from this world. The gate is weakening. Stay ready.",
+    description: "Something is coming… and it's not from this world. The gate is weakening. Stay ready.",
     rating: null,
     genre: null,
     age: null,
-    thumb: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&q=80",
+    mainImage: "/comingsoon.png",
+    registerLink: null,
+    ruleBookLink: null,
+    timeline: [
+      { label: "Registrations", date: "Coming Soon" },
+      { label: "Coming Soon", date: "Coming Soon" },
+      { label: "Coming Soon", date: "Coming Soon" },
+      { label: "Coming Soon", date: "Coming Soon" },
+      { label: "Coming Soon", date: "Coming Soon" },
+    ],
   },
   {
     id: 6,
     tag: "Event 110",
     title: "COMING SOON",
     subtitle: "DARK SIGNAL",
-    description: "Something is coming… and it’s not from this world. The gate is weakening. Stay ready.",
+    description: "Something is coming… and it's not from this world. The gate is weakening. Stay ready.",
     rating: null,
     genre: null,
     age: null,
-    thumb: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80",
+    mainImage: "/comingsoon.png",
+    registerLink: null,
+    ruleBookLink: null,
+    timeline: [
+      { label: "Registrations", date: "Coming Soon" },
+      { label: "Coming Soon", date: "Coming Soon" },
+      { label: "Coming Soon", date: "Coming Soon" },
+      { label: "Coming Soon", date: "Coming Soon" },
+      { label: "Coming Soon", date: "Coming Soon" },
+    ],
   },
-];
-
-const TIMELINE = [
-  { label: "Registrations", date: "Coming Soon" },
-  { label: "Coming Soon", date: "Coming Soon" },
-  { label: "Coming Soo", date: "Coming Soon" },
-  { label: "Coming Soon", date: "Coming Soon" },
-  { label: "Coming Soon", date: "Coming Soon" },
 ];
 
 const PARTICLES = Array.from({ length: 14 }, (_, i) => ({
@@ -148,7 +194,6 @@ export default function EventDescription() {
           backgroundSize: "56px 56px",
         }}
       />
-
       <div
         className="pointer-events-none absolute top-0 left-0 right-0 z-0"
         style={{
@@ -156,7 +201,6 @@ export default function EventDescription() {
           background: "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(255,0,0,0.16) 0%, transparent 75%)",
         }}
       />
-
       <div
         className="pointer-events-none absolute bottom-0 left-0 right-0 z-0"
         style={{
@@ -164,14 +208,12 @@ export default function EventDescription() {
           background: "radial-gradient(ellipse 70% 100% at 50% 100%, rgba(255,0,0,0.2) 0%, transparent 70%)",
         }}
       />
-
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
           background: "radial-gradient(ellipse 120% 110% at 50% 50%, transparent 42%, rgba(0,0,0,0.6) 100%)",
         }}
       />
-
       <div
         className="pointer-events-none absolute inset-0 z-0 opacity-[0.025]"
         style={{
@@ -179,7 +221,6 @@ export default function EventDescription() {
           backgroundSize: "180px 180px",
         }}
       />
-
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-[2]">
         {PARTICLES.map((p) => (
           <Particle key={p.id} {...p} />
@@ -203,10 +244,7 @@ export default function EventDescription() {
           </h2>
           <div
             className="h-[2px] w-24"
-            style={{
-              background: "#dc2626",
-              boxShadow: "0 0 10px rgba(220,38,38,0.5)",
-            }}
+            style={{ background: "#dc2626", boxShadow: "0 0 10px rgba(220,38,38,0.5)" }}
           />
         </div>
 
@@ -281,30 +319,73 @@ export default function EventDescription() {
                 initial="enter" animate="center" exit="exit"
                 transition={{ duration: 0.3, ease: "easeOut", delay: 0.12 }}
                 className="flex items-center gap-3 flex-wrap">
-                <button
-                  className="flex items-center gap-2 rounded font-bold uppercase tracking-widest text-white transition-all duration-200 hover:brightness-110 active:scale-95"
-                  style={{
-                    background: "#dc2626",
-                    fontFamily: "'Courier New', monospace",
-                    boxShadow: "0 0 10px rgba(220,38,38,0.25)",
-                    fontSize: "clamp(0.58rem, 1.8vw, 0.7rem)",
-                    padding: "clamp(8px,2vw,11px) clamp(14px,3vw,20px)",
-                  }}
-                >
-                  <span>▶</span> Register Now
-                </button>
-                <button
-                  className="flex items-center gap-2 rounded font-bold uppercase tracking-widest text-white transition-all duration-200 hover:bg-white/10 active:scale-95"
-                  style={{
-                    background: "rgba(255,255,255,0.05)",
-                    border: "1px solid rgba(255,255,255,0.13)",
-                    fontFamily: "'Courier New', monospace",
-                    fontSize: "clamp(0.58rem, 1.8vw, 0.7rem)",
-                    padding: "clamp(8px,2vw,11px) clamp(14px,3vw,20px)",
-                  }}
-                >
-                  Rule Book
-                </button>
+
+                {card.registerLink ? (
+                  <a
+                    href={card.registerLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 rounded font-bold uppercase tracking-widest text-white transition-all duration-200 hover:brightness-110 active:scale-95"
+                    style={{
+                      background: "#dc2626",
+                      fontFamily: "'Courier New', monospace",
+                      boxShadow: "0 0 10px rgba(220,38,38,0.25)",
+                      fontSize: "clamp(0.58rem, 1.8vw, 0.7rem)",
+                      padding: "clamp(8px,2vw,11px) clamp(14px,3vw,20px)",
+                      textDecoration: "none",
+                    }}
+                  >
+                    <span>&#9654;</span> Register Now
+                  </a>
+                ) : (
+                  <button
+                    disabled
+                    className="flex items-center gap-2 rounded font-bold uppercase tracking-widest cursor-not-allowed"
+                    style={{
+                      background: "rgba(220,38,38,0.15)",
+                      color: "rgba(255,255,255,0.3)",
+                      fontFamily: "'Courier New', monospace",
+                      fontSize: "clamp(0.58rem, 1.8vw, 0.7rem)",
+                      padding: "clamp(8px,2vw,11px) clamp(14px,3vw,20px)",
+                    }}
+                  >
+                    <span>&#9654;</span> Coming Soon
+                  </button>
+                )}
+
+                {card.ruleBookLink ? (
+                  <a
+                    href={card.ruleBookLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 rounded font-bold uppercase tracking-widest text-white transition-all duration-200 hover:bg-white/10 active:scale-95"
+                    style={{
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1px solid rgba(255,255,255,0.13)",
+                      fontFamily: "'Courier New', monospace",
+                      fontSize: "clamp(0.58rem, 1.8vw, 0.7rem)",
+                      padding: "clamp(8px,2vw,11px) clamp(14px,3vw,20px)",
+                      textDecoration: "none",
+                    }}
+                  >
+                    Rule Book
+                  </a>
+                ) : (
+                  <button
+                    disabled
+                    className="flex items-center gap-2 rounded font-bold uppercase tracking-widest cursor-not-allowed"
+                    style={{
+                      background: "rgba(255,255,255,0.03)",
+                      border: "1px solid rgba(255,255,255,0.06)",
+                      color: "rgba(255,255,255,0.2)",
+                      fontFamily: "'Courier New', monospace",
+                      fontSize: "clamp(0.58rem, 1.8vw, 0.7rem)",
+                      padding: "clamp(8px,2vw,11px) clamp(14px,3vw,20px)",
+                    }}
+                  >
+                    Rule Book
+                  </button>
+                )}
               </motion.div>
             </AnimatePresence>
 
@@ -325,7 +406,7 @@ export default function EventDescription() {
                   {(card.genre || card.age) && card.rating && <span className="w-px h-3 bg-white/15" />}
                   {card.rating && (
                     <span className="flex items-center gap-1">
-                      <span style={{ color: "#facc15" }}>★</span> {card.rating}
+                      <span style={{ color: "#facc15" }}>&#9733;</span> {card.rating}
                     </span>
                   )}
                 </motion.div>
@@ -334,10 +415,7 @@ export default function EventDescription() {
           </div>
 
           <div className="flex-shrink-0 order-1 md:order-2 w-full md:w-auto">
-            <div
-              className="hidden md:flex gap-3 items-stretch"
-              style={{ height: "390px" }}
-            >
+            <div className="hidden md:flex gap-3 items-stretch" style={{ height: "390px" }}>
               <div
                 className="relative rounded-2xl overflow-hidden"
                 style={{
@@ -355,7 +433,7 @@ export default function EventDescription() {
                     transition={{ duration: 0.36, ease: "easeOut" }}
                     className="absolute inset-0">
                     <img
-                      src="/comingsoon.png"
+                      src={card.mainImage}
                       alt={card.title}
                       className="w-full h-full object-cover"
                       style={{ filter: "brightness(0.5) saturate(0.65)" }}
@@ -416,7 +494,6 @@ export default function EventDescription() {
                     style={{ filter: "drop-shadow(0 0 8px rgba(220,38,38,0.4))" }}
                   />
                 </div>
-
                 <AnimatePresence mode="wait" custom={dir}>
                   <motion.div key={card.id + "mi"}
                     initial={{ opacity: 0 }}
@@ -424,7 +501,7 @@ export default function EventDescription() {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.32, ease: "easeOut" }}
                     className="absolute inset-0">
-                    <img src="/comingsoon.png" alt={card.title}
+                    <img src={card.mainImage} alt={card.title}
                       className="w-full h-full object-cover"
                       style={{ filter: "brightness(0.48) saturate(0.6)" }} />
                     <div className="absolute inset-0" style={{ background: "rgba(70,0,0,0.28)", mixBlendMode: "multiply" }} />
@@ -453,7 +530,7 @@ export default function EventDescription() {
                       boxShadow: i === active ? "0 0 6px rgba(220,38,38,0.2)" : "none",
                       opacity: i === active ? 1 : 0.38,
                     }}>
-                    <img src="/comingsoon.png" alt={c.title} className="w-full h-full object-cover"
+                    <img src="/tu_logo.png" alt={c.title} className="w-full h-full object-cover"
                       style={{ filter: "brightness(0.36) saturate(0.45)" }} />
                     {i === active && (
                       <div className="absolute inset-0" style={{ background: "rgba(220,38,38,0.09)" }} />
@@ -494,57 +571,65 @@ export default function EventDescription() {
               fontSize: "clamp(8px,1.8vw,10px)",
             }}
           >
-            ── Event Timeline
+            &#9472;&#9472; Event Timeline
           </p>
 
-          <div className="relative">
-            <div
-              className="absolute left-0 right-0 z-0"
-              style={{ top: "9px", height: "1px", background: "rgba(255,255,255,0.07)" }}
-            />
-
-            <div
-              className="grid"
-              style={{ gridTemplateColumns: `repeat(${TIMELINE.length}, 1fr)` }}
+          <AnimatePresence mode="wait" custom={dir}>
+            <motion.div
+              key={card.id + "tl"}
+              custom={dir}
+              variants={slide}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.3, ease: "easeOut", delay: 0.1 }}
+              className="relative"
             >
-              {TIMELINE.map((item, i) => (
-                <div key={i} className="flex flex-col items-center gap-1 relative z-10">
-                  <div
-                    className="w-[18px] h-[18px] rounded-full flex items-center justify-center flex-shrink-0"
-                    style={{
-                      background: "#0a0a0a",
-                      border: "1.5px solid rgba(220,38,38,0.42)",
-                      boxShadow: "0 0 5px rgba(220,38,38,0.15)",
-                    }}
-                  >
-                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: "rgba(220,38,38,0.6)" }} />
+              <div
+                className="absolute left-0 right-0 z-0"
+                style={{ top: "9px", height: "1px", background: "rgba(255,255,255,0.07)" }}
+              />
+              <div
+                className="grid"
+                style={{ gridTemplateColumns: `repeat(${card.timeline.length}, 1fr)` }}
+              >
+                {card.timeline.map((item, i) => (
+                  <div key={i} className="flex flex-col items-center gap-1 relative z-10">
+                    <div
+                      className="w-[18px] h-[18px] rounded-full flex items-center justify-center flex-shrink-0"
+                      style={{
+                        background: "#0a0a0a",
+                        border: "1.5px solid rgba(220,38,38,0.42)",
+                        boxShadow: "0 0 5px rgba(220,38,38,0.15)",
+                      }}
+                    >
+                      <div className="w-1.5 h-1.5 rounded-full" style={{ background: "rgba(220,38,38,0.6)" }} />
+                    </div>
+                    <span
+                      className="font-bold text-center"
+                      style={{
+                        color: "rgba(220,38,38,0.7)",
+                        fontFamily: "'Courier New', monospace",
+                        fontSize: "clamp(6px,1.6vw,9px)",
+                      }}
+                    >
+                      {item.date}
+                    </span>
+                    <span
+                      className="text-center leading-tight hidden sm:block"
+                      style={{
+                        color: "rgba(255,255,255,0.28)",
+                        fontFamily: "'Courier New', monospace",
+                        fontSize: "clamp(5px,1.3vw,7.5px)",
+                      }}
+                    >
+                      {item.label}
+                    </span>
                   </div>
-
-                  <span
-                    className="font-bold text-center"
-                    style={{
-                      color: "rgba(220,38,38,0.7)",
-                      fontFamily: "'Courier New', monospace",
-                      fontSize: "clamp(6px,1.6vw,9px)",
-                    }}
-                  >
-                    {item.date}
-                  </span>
-
-                  <span
-                    className="text-center leading-tight hidden sm:block"
-                    style={{
-                      color: "rgba(255,255,255,0.28)",
-                      fontFamily: "'Courier New', monospace",
-                      fontSize: "clamp(5px,1.3vw,7.5px)",
-                    }}
-                  >
-                    {item.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+                ))}
+              </div>
+            </motion.div>
+          </AnimatePresence>
 
           <div className="mt-5">
             <span
@@ -559,7 +644,7 @@ export default function EventDescription() {
               }}
             >
               <span className="w-1.5 h-1.5 rounded-full animate-pulse flex-shrink-0" style={{ background: "#ef4444" }} />
-              Coming Soon — More Events Dropping
+              Coming Soon &#8212; More Events Dropping
             </span>
           </div>
         </div>

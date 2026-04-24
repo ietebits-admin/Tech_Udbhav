@@ -5,16 +5,16 @@ import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const EVENTS = [
-  { id: 0, code: "001" },
-  { id: 1, code: "010" },
-  { id: 2, code: "011" },
-  { id: 3, code: "100" },
-  { id: 4, code: "101" },
+  { id: 0, code: "001", title: "", image: "/robosoccer.png" },
+  { id: 1, code: "010", title: "COMING SOON", image: null },
+  { id: 2, code: "011", title: "COMING SOON", image: null },
+  { id: 3, code: "100", title: "COMING SOON", image: null },
+  { id: 4, code: "101", title: "COMING SOON", image: null },
 ] as const;
 
 export default function EventSlider() {
-  const [activeIndex, setActiveIndex] = useState(1);
-  const [scramble, setScramble] = useState<string>(EVENTS[1].code);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [scramble, setScramble] = useState<string>(EVENTS[0].code);
 
   useEffect(() => {
     const activeCode = EVENTS[activeIndex].code;
@@ -92,20 +92,34 @@ export default function EventSlider() {
                   scale: isCenter ? 1 : 0.85,
                   x: isCenter ? 0 : isLeft ? -320 : 320,
                   rotateY: isLeft ? 20 : isRight ? -20 : 0,
+                  opacity: isCenter ? 1 : 0.4,
                 }}
                 transition={{ type: "spring", stiffness: 120, damping: 18 }}
                 className={`absolute h-[380px] w-[260px] md:h-[460px] md:w-[340px] ${
                   isCenter ? "z-30" : "z-10"
                 }`}
               >
-                <div className="flex h-full w-full flex-col items-center rounded-xl border border-white/10 bg-black/10 p-8 text-center backdrop-blur-xs">
-                  <span className="mb-auto font-mono text-xs tracking-widest text-red-500">
-                    EVENT {isCenter ? scramble : event.code}
-                  </span>
+                <div className="relative flex h-full w-full flex-col items-center overflow-hidden rounded-xl border border-white/10 bg-black/40 p-4 text-center backdrop-blur-md">
+                  {event.image ? (
+                    <div className="absolute inset-0 z-0">
+                      <img
+                        src={event.image}
+                        alt={event.title}
+                        className="h-full w-full object-cover opacity-60 transition-opacity duration-500 group-hover:opacity-80"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+                    </div>
+                  ) : null}
 
-                  <h3 className="stranger-font stranger-glow text-3xl uppercase text-red-500 md:text-4xl">
-                    COMING SOON
-                  </h3>
+                  <div className="relative z-10 flex h-full w-full flex-col items-center justify-between py-4">
+                    <span className="font-mono text-xs tracking-widest text-red-500 drop-shadow-lg">
+                      EVENT {isCenter ? scramble : event.code}
+                    </span>
+
+                    <h3 className="stranger-font stranger-glow text-3xl uppercase text-red-500 md:text-4xl">
+                      {event.title}
+                    </h3>
+                  </div>
                 </div>
               </motion.div>
             );

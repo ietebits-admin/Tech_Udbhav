@@ -52,6 +52,8 @@ export default function About() {
     [],
   );
 
+  const eventLabels = ["ROBO SOCCER", "Event 010", "Event 011", "Event 100", "Event 101", "Event 110"];
+
   return (
     <section
       id="about"
@@ -164,6 +166,71 @@ export default function About() {
         >
           <div className="absolute -inset-4 rounded-[2rem] bg-red-600/8 blur-3xl" />
           <div className="relative rounded-[2rem] border border-white/10 bg-black/25 p-3 backdrop-blur-sm md:p-5">
+            <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-2">
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0"
+                  style={{
+                    border: "1.5px solid rgba(220,38,38,0.4)",
+                    boxShadow: "0 0 10px rgba(220,38,38,0.15)",
+                  }}
+                >
+                  <img
+                    src="./robosoccer.png"
+                    alt="Robo Soccer"
+                    className="w-full h-full object-cover"
+                    style={{ filter: "brightness(0.9) saturate(1.1)" }}
+                  />
+                </div>
+                <div>
+                  <p
+                    className="font-black text-white leading-tight"
+                    style={{
+                      fontFamily: "'Georgia', serif",
+                      fontSize: "clamp(0.75rem, 2vw, 0.9rem)",
+                    }}
+                  >
+                    ROBO SOCCER
+                  </p>
+                  <p
+                    className="font-bold uppercase tracking-widest"
+                    style={{
+                      color: "#ef4444",
+                      fontFamily: "'Courier New', monospace",
+                      fontSize: "clamp(6px, 1.4vw, 8px)",
+                    }}
+                  >
+                    Now Live &#8212; Register Open
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 flex-wrap">
+                {eventLabels.map((label, i) => (
+                  <span
+                    key={i}
+                    className="inline-flex items-center gap-1.5 rounded-full font-bold uppercase"
+                    style={{
+                      fontFamily: "'Courier New', monospace",
+                      fontSize: "clamp(6px, 1.3vw, 8px)",
+                      padding: "3px 8px",
+                      background: i === 0 ? "rgba(220,38,38,0.12)" : "rgba(255,255,255,0.04)",
+                      border: i === 0 ? "1px solid rgba(220,38,38,0.4)" : "1px solid rgba(255,255,255,0.08)",
+                      color: i === 0 ? "#ef4444" : "rgba(255,255,255,0.25)",
+                    }}
+                  >
+                    {i === 0 && (
+                      <span
+                        className="w-1 h-1 rounded-full animate-pulse flex-shrink-0"
+                        style={{ background: "#ef4444" }}
+                      />
+                    )}
+                    {label}
+                  </span>
+                ))}
+              </div>
+            </div>
+
             <EventSlider />
           </div>
         </motion.div>
