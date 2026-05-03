@@ -52,7 +52,7 @@ export default function About() {
     [],
   );
 
-  const eventLabels = ["ROBO SOCCER", "Event 010", "Event 011", "Event 100", "Event 101", "Event 110"];
+  const eventLabels = ["ROBO SOCCER", "CLOAK CODING", "MINEFIELD RESCUE", "SENSORSYNC", "TECHNO-ग्राम", "Event 110"];
 
   return (
     <section
@@ -176,8 +176,8 @@ export default function About() {
                   }}
                 >
                   <img
-                    src="./robosoccer.png"
-                    alt="Robo Soccer"
+                    src="./techno.png"
+                    alt="Technogram"
                     className="w-full h-full object-cover"
                     style={{ filter: "brightness(0.9) saturate(1.1)" }}
                   />
@@ -190,7 +190,7 @@ export default function About() {
                       fontSize: "clamp(0.75rem, 2vw, 0.9rem)",
                     }}
                   >
-                    ROBO SOCCER
+                    TECHNO-ग्राम
                   </p>
                   <p
                     className="font-bold uppercase tracking-widest"

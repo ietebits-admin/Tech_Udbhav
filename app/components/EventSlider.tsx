@@ -1,139 +1,286 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const EVENTS = [
-  { id: 0, code: "001", title: "", image: "/robosoccer.png" },
-  { id: 1, code: "010", title: "COMING SOON", image: null },
-  { id: 2, code: "011", title: "COMING SOON", image: null },
-  { id: 3, code: "100", title: "COMING SOON", image: null },
-  { id: 4, code: "101", title: "COMING SOON", image: null },
-] as const;
+  { id: 0, code: "001", title: "ROBO SOCCER", image: "/robosoccer.png" },
+  { id: 1, code: "010", title: "CLOAK CODING", image: "/cloakcoding.png" },
+  { id: 2, code: "011", title: "MINEFIELD RESCUE", image: "/minefield.png" },
+  { id: 3, code: "100", title: "SENSORSYNC", image: "/sensor.png" },
+  { id: 4, code: "101", title: "TECHNO-ग्राम", image: "/techno.png" },
+  { id: 5, code: "110", title: "COMING SOON", image: "/comingsoon.png" },
+];
 
-export default function EventSlider() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [scramble, setScramble] = useState<string>(EVENTS[0].code);
+function useScramble(value: string) {
+  const [display, setDisplay] = useState(value);
 
   useEffect(() => {
-    const activeCode = EVENTS[activeIndex].code;
-    const chars = ["0", "1"] as const;
+    const chars = ["0", "1"];
     let iterations = 0;
-
-    const intervalId: ReturnType<typeof setInterval> = setInterval(() => {
-      setScramble(
-        activeCode
+    const id = setInterval(() => {
+      setDisplay(
+        value
           .split("")
-          .map((char, index) => {
-            if (index < iterations) return char;
-            return chars[Math.floor(Math.random() * chars.length)];
-          })
-          .join(""),
+          .map((char, i) =>
+            i < iterations ? char : chars[Math.floor(Math.random() * 2)]
+          )
+          .join("")
       );
-
       iterations += 0.5;
-
-      if (iterations >= activeCode.length) {
-        clearInterval(intervalId);
-        setScramble(activeCode);
+      if (iterations >= value.length) {
+        clearInterval(id);
+        setDisplay(value);
       }
     }, 50);
+    return () => clearInterval(id);
+  }, [value]);
 
-    return () => clearInterval(intervalId);
-  }, [activeIndex]);
+  return display;
+}
 
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % EVENTS.length);
-  };
+export default function EventSlider() {
+  const [active, setActive] = useState(0);
+  const scrambled = useScramble(EVENTS[active].code);
 
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + EVENTS.length) % EVENTS.length);
+  const prev = () => setActive((p) => (p - 1 + EVENTS.length) % EVENTS.length);
+  const next = () => setActive((p) => (p + 1) % EVENTS.length);
+
+  const getPos = (i: number) => {
+    const diff = (i - active + EVENTS.length) % EVENTS.length;
+    if (diff === 0) return "center";
+    if (diff === 1) return "right";
+    if (diff === EVENTS.length - 1) return "left";
+    if (diff === 2) return "far-right";
+    if (diff === EVENTS.length - 2) return "far-left";
+    return "hidden";
   };
 
   return (
-    <div className="relative flex h-[450px] w-full max-w-7xl items-center justify-center overflow-hidden rounded-2xl border border-white/10 md:h-[550px]">
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: "url('/strangeBIT.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          transform: "scale(1.1)",
-          filter: "brightness(0.9) contrast(1.1)",
-        }}
-      />
+    <div className="flex flex-col items-center w-full max-w-7xl gap-4">
+      <div className="relative flex h-[420px] w-full items-center justify-center overflow-hidden rounded-2xl border border-white/10 md:h-[560px]">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url('/strangeBIT.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            transform: "scale(1.08)",
+            filter: "brightness(0.85) contrast(1.1)",
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.55)_100%)]" />
 
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.05)_0%,rgba(0,0,0,0.4)_75%)]" />
+        <div className="relative z-10 flex h-full w-full items-center justify-center">
+          <button
+            type="button"
+            onClick={prev}
+            aria-label="Previous event"
+            className="absolute left-3 z-40 hidden md:flex rounded-full border border-white/20 bg-black/30 p-3 backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-black/50 hover:border-red-500/50 md:left-8"
+          >
+            <ChevronLeft size={28} className="text-white" />
+          </button>
 
-      <div className="relative z-10 flex h-full w-full items-center justify-center">
+          <div className="relative flex h-full w-full items-center justify-center">
+            {EVENTS.map((event, index) => {
+              const pos = getPos(index);
+              if (pos === "hidden") return null;
+
+              const isCenter = pos === "center";
+              const xMap: Record<string, number> = {
+                center: 0,
+                left: -280,
+                right: 280,
+                "far-left": -480,
+                "far-right": 480,
+              };
+              const scaleMap: Record<string, number> = {
+                center: 1,
+                left: 0.82,
+                right: 0.82,
+                "far-left": 0.65,
+                "far-right": 0.65,
+              };
+              const opacityMap: Record<string, number> = {
+                center: 1,
+                left: 0.45,
+                right: 0.45,
+                "far-left": 0.18,
+                "far-right": 0.18,
+              };
+
+              return (
+                <motion.div
+                  key={event.id}
+                  animate={{
+                    scale: scaleMap[pos],
+                    x: xMap[pos],
+                    opacity: opacityMap[pos],
+                    rotateY: pos === "left" ? 18 : pos === "right" ? -18 : 0,
+                  }}
+                  transition={{ type: "spring", stiffness: 130, damping: 20 }}
+                  className={`absolute ${isCenter ? "z-30 cursor-default" : "z-10 cursor-pointer"}`}
+                  onClick={!isCenter ? () => setActive(index) : undefined}
+                  style={{
+                    width: "clamp(200px, 40vw, 320px)",
+                    height: "clamp(260px, 52vw, 440px)",
+                  }}
+                >
+                  <div
+                    className="relative flex h-full w-full flex-col overflow-hidden rounded-2xl"
+                    style={{
+                      border: isCenter
+                        ? "1.5px solid rgba(220,38,38,0.6)"
+                        : "1px solid rgba(255,255,255,0.08)",
+                      boxShadow: isCenter
+                        ? "0 0 32px rgba(220,38,38,0.22), 0 20px 60px rgba(0,0,0,0.7)"
+                        : "0 8px 32px rgba(0,0,0,0.5)",
+                      background: "#000",
+                    }}
+                  >
+                    <AnimatePresence mode="wait">
+                      {event.image && (
+                        <motion.img
+                          key={event.image}
+                          src={event.image}
+                          alt={event.title}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: isCenter ? 0.92 : 0.6 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.35 }}
+                          className="absolute inset-0 h-full w-full"
+                          style={{ objectFit: "contain" }}
+                        />
+                      )}
+                    </AnimatePresence>
+
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background:
+                          "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)",
+                      }}
+                    />
+
+                    {isCenter && (
+                      <div
+                        className="absolute inset-0 pointer-events-none"
+                        style={{
+                          background:
+                            "radial-gradient(ellipse at 50% 0%, rgba(220,38,38,0.08) 0%, transparent 70%)",
+                        }}
+                      />
+                    )}
+
+                    <div className="relative z-10 flex h-full w-full flex-col justify-between p-4 md:p-5">
+                      <span
+                        className="font-mono text-[10px] tracking-[0.25em] uppercase"
+                        style={{ color: "rgba(220,38,38,0.85)" }}
+                      >
+                        EVENT {isCenter ? scrambled : event.code}
+                      </span>
+
+                      <div className="flex flex-col gap-1">
+                        <h3
+                          className="font-black uppercase leading-none tracking-tight"
+                          style={{
+                            fontFamily: "'Georgia', serif",
+                            fontSize: "clamp(1rem, 3.5vw, 1.6rem)",
+                            color: "#fff",
+                            textShadow: isCenter
+                              ? "0 0 20px rgba(220,38,38,0.5), 0 2px 8px rgba(0,0,0,0.9)"
+                              : "0 2px 6px rgba(0,0,0,0.8)",
+                          }}
+                        >
+                          {event.title}
+                        </h3>
+                        {isCenter && (
+                          <div
+                            className="h-[1.5px] w-8 rounded-full"
+                            style={{ background: "#dc2626" }}
+                          />
+                        )}
+                      </div>
+                    </div>
+
+                    {isCenter && (
+                      <div
+                        className="absolute bottom-0 left-0 right-0 h-[2px]"
+                        style={{
+                          background:
+                            "linear-gradient(to right, transparent, #dc2626, transparent)",
+                        }}
+                      />
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <button
+            type="button"
+            onClick={next}
+            aria-label="Next event"
+            className="absolute right-3 z-40 hidden md:flex rounded-full border border-white/20 bg-black/30 p-3 backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-black/50 hover:border-red-500/50 md:right-8"
+          >
+            <ChevronRight size={28} className="text-white" />
+          </button>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-6 md:hidden">
         <button
           type="button"
-          onClick={handlePrev}
+          onClick={prev}
           aria-label="Previous event"
-          className="absolute left-4 z-40 rounded-full border border-white/20 bg-black/20 p-3 backdrop-blur transition hover:scale-110 md:left-10"
+          className="flex rounded-full border border-white/20 bg-white/5 p-3 backdrop-blur-sm transition-all duration-200 active:scale-95"
+          style={{ borderColor: "rgba(220,38,38,0.35)" }}
         >
-          <ChevronLeft size={32} />
+          <ChevronLeft size={24} className="text-white" />
         </button>
 
-        <div className="relative flex h-full w-full -translate-y-4 items-center justify-center">
-          {EVENTS.map((event, index) => {
-            const isCenter = index === activeIndex;
-            const isLeft =
-              index === (activeIndex - 1 + EVENTS.length) % EVENTS.length;
-            const isRight = index === (activeIndex + 1) % EVENTS.length;
-
-            if (!isCenter && !isLeft && !isRight) return null;
-
-            return (
-              <motion.div
-                key={event.id}
-                animate={{
-                  scale: isCenter ? 1 : 0.85,
-                  x: isCenter ? 0 : isLeft ? -320 : 320,
-                  rotateY: isLeft ? 20 : isRight ? -20 : 0,
-                  opacity: isCenter ? 1 : 0.4,
-                }}
-                transition={{ type: "spring", stiffness: 120, damping: 18 }}
-                className={`absolute h-[380px] w-[260px] md:h-[460px] md:w-[340px] ${
-                  isCenter ? "z-30" : "z-10"
-                }`}
-              >
-                <div className="relative flex h-full w-full flex-col items-center overflow-hidden rounded-xl border border-white/10 bg-black/40 p-4 text-center backdrop-blur-md">
-                  {event.image ? (
-                    <div className="absolute inset-0 z-0">
-                      <img
-                        src={event.image}
-                        alt={event.title}
-                        className="h-full w-full object-cover opacity-60 transition-opacity duration-500 group-hover:opacity-80"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-                    </div>
-                  ) : null}
-
-                  <div className="relative z-10 flex h-full w-full flex-col items-center justify-between py-4">
-                    <span className="font-mono text-xs tracking-widest text-red-500 drop-shadow-lg">
-                      EVENT {isCenter ? scramble : event.code}
-                    </span>
-
-                    <h3 className="stranger-font stranger-glow text-3xl uppercase text-red-500 md:text-4xl">
-                      {event.title}
-                    </h3>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
+        <div className="flex gap-1.5 items-center">
+          {EVENTS.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActive(i)}
+              className="rounded-full transition-all duration-300"
+              style={{
+                width: i === active ? "20px" : "5px",
+                height: "5px",
+                background: i === active ? "#dc2626" : "rgba(255,255,255,0.22)",
+              }}
+            />
+          ))}
         </div>
 
         <button
           type="button"
-          onClick={handleNext}
+          onClick={next}
           aria-label="Next event"
-          className="absolute right-4 z-40 rounded-full border border-white/20 bg-black/20 p-3 backdrop-blur transition hover:scale-110 md:right-10"
+          className="flex rounded-full border border-white/20 bg-white/5 p-3 backdrop-blur-sm transition-all duration-200 active:scale-95"
+          style={{ borderColor: "rgba(220,38,38,0.35)" }}
         >
-          <ChevronRight size={32} />
+          <ChevronRight size={24} className="text-white" />
         </button>
+      </div>
+
+      <div className="hidden md:flex gap-2 items-center">
+        {EVENTS.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className="rounded-full transition-all duration-300"
+            style={{
+              width: i === active ? "20px" : "5px",
+              height: "5px",
+              background: i === active ? "#dc2626" : "rgba(255,255,255,0.22)",
+            }}
+          />
+        ))}
       </div>
     </div>
   );

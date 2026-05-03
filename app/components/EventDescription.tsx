@@ -35,9 +35,9 @@ const EVENT_CARDS = [
     rating: null,
     genre: null,
     age: null,
-    mainImage: "/comingsoon.png",
-    registerLink: null,
-    ruleBookLink: null,
+    mainImage: "/cloakcoding.png",
+    registerLink: "https://tally.so/r/kdON4R",
+    ruleBookLink: "https://drive.google.com/file/d/1ecFJi30k1wFd1r8GLZatPKuFzxZEq5lT/view?usp=sharing",
     timeline: [
       { label: "Registrations", date: "Coming Soon" },
       { label: "Round 1", date: "Coming Soon" },
@@ -56,9 +56,9 @@ const EVENT_CARDS = [
     rating: null,
     genre: null,
     age: null,
-    mainImage: "/comingsoon.png",
-    registerLink: null,
-    ruleBookLink: null,
+    mainImage: "/minefield.png",
+    registerLink: "https://tally.so/r/ob0dGb",
+    ruleBookLink: "https://drive.google.com/file/d/1w_izPz4J16JeRv8r0WOjZCRq0XbEUDrL/view",
     timeline: [
       { label: "Registrations", date: "Coming Soon" },
       { label: "Trial Run", date: "Coming Soon" },
@@ -70,15 +70,15 @@ const EVENT_CARDS = [
   {
     id: 4,
     tag: "Event 100",
-    title: "COMING SOON",
-    subtitle: "DARK SIGNAL",
-    description: "Something is coming… and it's not from this world. The gate is weakening. Stay ready.",
+    title: "SENSORSYNC",
+    subtitle: "ASSEMBLE TO CREATE",
+    description: "Beyond the veil of the digital rift, your prototype is your only lifeline. Step out of the simulation and into the real world, where the strongest circuits survive the transition.",
     rating: null,
     genre: null,
     age: null,
-    mainImage: "/comingsoon.png",
-    registerLink: null,
-    ruleBookLink: null,
+    mainImage: "/sensor.png",
+    registerLink: "https://tally.so/r/jaGPWx",
+    ruleBookLink: "https://drive.google.com/file/d/1le-WidGntfF-tNJkrSiaBoX_O8cxnMlP/view?usp=sharing",
     timeline: [
       { label: "Registrations", date: "Coming Soon" },
       { label: "Coming Soon", date: "Coming Soon" },
@@ -90,15 +90,15 @@ const EVENT_CARDS = [
   {
     id: 5,
     tag: "Event 101",
-    title: "COMING SOON",
-    subtitle: "DARK SIGNAL",
-    description: "Something is coming… and it's not from this world. The gate is weakening. Stay ready.",
+    title: "TECHNO-ग्राम",
+    subtitle: "FOR THE VILLAGE",
+    description: "In the quiet of the rural heartland, engineering becomes a lifeline. From the soil to the circuit, only the solutions that bridge the gap between innovation and reality will endure",
     rating: null,
     genre: null,
     age: null,
-    mainImage: "/comingsoon.png",
-    registerLink: null,
-    ruleBookLink: null,
+    mainImage: "/techno.png",
+    registerLink: "https://tally.so/r/kdOyPj",
+    ruleBookLink: "https://drive.google.com/file/d/18ZKeK2LkSA0rxO0VIGGPQ-I6Uo45OaC9/view?usp=sharing",
     timeline: [
       { label: "Registrations", date: "Coming Soon" },
       { label: "Coming Soon", date: "Coming Soon" },
@@ -415,12 +415,14 @@ export default function EventDescription() {
           </div>
 
           <div className="flex-shrink-0 order-1 md:order-2 w-full md:w-auto">
-            <div className="hidden md:flex gap-3 items-stretch" style={{ height: "390px" }}>
+            {/* ── Desktop layout ── */}
+            <div className="hidden md:flex gap-3 items-start">
+              {/* Square container matching 1080×1080 poster ratio */}
               <div
-                className="relative rounded-2xl overflow-hidden"
+                className="relative rounded-2xl overflow-hidden flex-shrink-0"
                 style={{
-                  width: "290px",
-                  flexShrink: 0,
+                  width: "340px",
+                  height: "340px",
                   background: "#000",
                   boxShadow: "0 0 20px rgba(220,38,38,0.12), 0 16px 44px rgba(0,0,0,0.85)",
                 }}
@@ -432,27 +434,28 @@ export default function EventDescription() {
                     exit={{ opacity: 0, scale: 0.97 }}
                     transition={{ duration: 0.36, ease: "easeOut" }}
                     className="absolute inset-0">
+                    {/* object-contain so full square poster is never cropped */}
                     <img
                       src={card.mainImage}
                       alt={card.title}
-                      className="w-full h-full object-cover"
-                      style={{ filter: "brightness(0.5) saturate(0.65)" }}
+                      className="w-full h-full object-contain"
+                      style={{ filter: "brightness(0.92) saturate(0.95)" }}
                     />
-                    <div className="absolute inset-0" style={{ background: "rgba(70,0,0,0.3)", mixBlendMode: "multiply" }} />
+                    <div className="absolute inset-0" style={{ background: "rgba(70,0,0,0.1)", mixBlendMode: "multiply" }} />
                   </motion.div>
                 </AnimatePresence>
-                <div className="absolute bottom-0 left-0 right-0 h-2/5 pointer-events-none z-10"
-                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.82), transparent)" }} />
+                <div className="absolute bottom-0 left-0 right-0 h-1/4 pointer-events-none z-10"
+                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.65), transparent)" }} />
                 <div className="absolute bottom-3 left-4 z-20 text-[10px] font-bold"
-                  style={{ color: "rgba(255,255,255,0.25)", fontFamily: "'Courier New', monospace" }}>
+                  style={{ color: "rgba(255,255,255,0.45)", fontFamily: "'Courier New', monospace" }}>
                   {String(active + 1).padStart(2, "0")} / {String(EVENT_CARDS.length).padStart(2, "0")}
                 </div>
               </div>
 
-              <div className="flex flex-col gap-1.5" style={{ width: "88px", flexShrink: 0 }}>
+              <div className="flex flex-col gap-1.5" style={{ width: "52px", flexShrink: 0, height: "340px" }}>
                 {EVENT_CARDS.map((c, i) => (
                   <button key={c.id} onClick={() => go(i)}
-                    className="relative flex-1 rounded-xl overflow-hidden transition-all duration-300"
+                    className="relative flex-1 rounded-lg overflow-hidden transition-all duration-300"
                     style={{
                       background: "#000",
                       border: i === active ? "1.5px solid rgba(220,38,38,0.7)" : "1.5px solid rgba(255,255,255,0.06)",
@@ -465,7 +468,7 @@ export default function EventDescription() {
                     {i === active && (
                       <div className="absolute inset-0" style={{ background: "rgba(220,38,38,0.08)" }} />
                     )}
-                    <div className="absolute bottom-0.5 right-1 text-[7px] font-bold z-10"
+                    <div className="absolute bottom-0.5 right-1 text-[6px] font-bold z-10"
                       style={{
                         color: i === active ? "#ef4444" : "rgba(255,255,255,0.16)",
                         fontFamily: "'Courier New', monospace",
@@ -477,23 +480,17 @@ export default function EventDescription() {
               </div>
             </div>
 
+            {/* ── Mobile layout ── */}
             <div className="flex flex-col gap-2.5 md:hidden">
               <div
                 className="relative w-full rounded-xl overflow-hidden"
                 style={{
-                  paddingTop: "56.25%",
+                  paddingTop: "100%",
                   background: "#000",
                   boxShadow: "0 0 16px rgba(220,38,38,0.1), 0 10px 30px rgba(0,0,0,0.8)",
                 }}
               >
-                <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-                  <img
-                    src="/tu_logo.png"
-                    alt="TU Logo"
-                    className="w-14 h-14 object-contain opacity-75"
-                    style={{ filter: "drop-shadow(0 0 8px rgba(220,38,38,0.4))" }}
-                  />
-                </div>
+                {/* FIX 2: tu_logo.png overlay completely removed from mobile main poster */}
                 <AnimatePresence mode="wait" custom={dir}>
                   <motion.div key={card.id + "mi"}
                     initial={{ opacity: 0 }}
@@ -501,16 +498,17 @@ export default function EventDescription() {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.32, ease: "easeOut" }}
                     className="absolute inset-0">
+                    {/* Mobile: object-contain ensures full 1080×1080 poster is never cropped */}
                     <img src={card.mainImage} alt={card.title}
-                      className="w-full h-full object-cover"
-                      style={{ filter: "brightness(0.48) saturate(0.6)" }} />
-                    <div className="absolute inset-0" style={{ background: "rgba(70,0,0,0.28)", mixBlendMode: "multiply" }} />
+                      className="w-full h-full object-contain"
+                      style={{ filter: "brightness(0.92) saturate(0.95)" }} />
+                    <div className="absolute inset-0" style={{ background: "rgba(70,0,0,0.15)", mixBlendMode: "multiply" }} />
                   </motion.div>
                 </AnimatePresence>
                 <div className="absolute bottom-0 left-0 right-0 h-1/3 pointer-events-none z-10"
-                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.78), transparent)" }} />
+                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.72), transparent)" }} />
                 <div className="absolute bottom-2 left-3 z-20 text-[9px] font-bold"
-                  style={{ color: "rgba(255,255,255,0.25)", fontFamily: "'Courier New', monospace" }}>
+                  style={{ color: "rgba(255,255,255,0.45)", fontFamily: "'Courier New', monospace" }}>
                   {String(active + 1).padStart(2, "0")} / {String(EVENT_CARDS.length).padStart(2, "0")}
                 </div>
               </div>
