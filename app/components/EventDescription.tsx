@@ -3,6 +3,29 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const SCHEDULE = [
+  {
+    day: "9th May",
+    half: "1st Half",
+    events: ["SensorSync", "TechnoGram"],
+  },
+  {
+    day: "9th May",
+    half: "2nd Half",
+    events: ["RoboSoccer", "MineField Rescue"],
+  },
+  {
+    day: "10th May",
+    half: "1st Half",
+    events: ["SensorSync Finals", "Tradein", "Cloak Coding"],
+  },
+  {
+    day: "10th May",
+    half: "2nd Half",
+    events: ["Robo Soccer Finals", "MineField Rescue Finals"],
+  },
+];
+
 const EVENT_CARDS = [
   {
     id: 1,
@@ -11,19 +34,9 @@ const EVENT_CARDS = [
     subtitle: "MECHANIZED MADNESS",
     description:
       "The arena flickers, bots clash, and survival decides the champion. In this high-stakes soccer battle, only the most cunning and agile machines will prevail.",
-    rating: null,
-    genre: null,
-    age: null,
     mainImage: "./robosoccer.png",
     registerLink: "https://tally.so/r/EkBWZr",
     ruleBookLink: "https://drive.google.com/file/d/1SL_Wm3wz56CChxmXZSr5WQ3JsSRHOZAJ/view?usp=drive_link",
-    timeline: [
-      { label: "Registrations", date: "Coming Soon" },
-      { label: "Qualifier", date: "Coming Soon" },
-      { label: "Semi Final", date: "Coming Soon" },
-      { label: "Final", date: "Coming Soon" },
-      { label: "Results", date: "Coming Soon" },
-    ],
   },
   {
     id: 2,
@@ -32,19 +45,9 @@ const EVENT_CARDS = [
     subtitle: "CODE THE UPSIDE DOWN",
     description:
       "In the shadows of the Upside Down, code becomes a weapon. Hidden minds compete in a battle where only the unseen logic survives.",
-    rating: null,
-    genre: null,
-    age: null,
     mainImage: "/cloakcoding.png",
     registerLink: "https://tally.so/r/kdON4R",
     ruleBookLink: "https://drive.google.com/file/d/1ecFJi30k1wFd1r8GLZatPKuFzxZEq5lT/view?usp=sharing",
-    timeline: [
-      { label: "Registrations", date: "Coming Soon" },
-      { label: "Round 1", date: "Coming Soon" },
-      { label: "Round 2", date: "Coming Soon" },
-      { label: "Final", date: "Coming Soon" },
-      { label: "Results", date: "Coming Soon" },
-    ],
   },
   {
     id: 3,
@@ -53,79 +56,20 @@ const EVENT_CARDS = [
     subtitle: "NAVIGATE FOR RESCUE",
     description:
       "Bots navigate a minefield to rescue hostages before traps pull them into darkness. Precision, strategy, and nerves of steel are the only way out.",
-    rating: null,
-    genre: null,
-    age: null,
     mainImage: "/minefield.png",
     registerLink: "https://tally.so/r/ob0dGb",
     ruleBookLink: "https://drive.google.com/file/d/1w_izPz4J16JeRv8r0WOjZCRq0XbEUDrL/view",
-    timeline: [
-      { label: "Registrations", date: "Coming Soon" },
-      { label: "Trial Run", date: "Coming Soon" },
-      { label: "Qualifier", date: "Coming Soon" },
-      { label: "Final", date: "Coming Soon" },
-      { label: "Results", date: "Coming Soon" },
-    ],
   },
   {
     id: 4,
     tag: "Event 100",
     title: "SENSORSYNC",
     subtitle: "ASSEMBLE TO CREATE",
-    description: "Beyond the veil of the digital rift, your prototype is your only lifeline. Step out of the simulation and into the real world, where the strongest circuits survive the transition.",
-    rating: null,
-    genre: null,
-    age: null,
+    description:
+      "Beyond the veil of the digital rift, your prototype is your only lifeline. Step out of the simulation and into the real world, where the strongest circuits survive the transition.",
     mainImage: "/sensor.png",
     registerLink: "https://tally.so/r/jaGPWx",
     ruleBookLink: "https://drive.google.com/file/d/1le-WidGntfF-tNJkrSiaBoX_O8cxnMlP/view?usp=sharing",
-    timeline: [
-      { label: "Registrations", date: "Coming Soon" },
-      { label: "Coming Soon", date: "Coming Soon" },
-      { label: "Coming Soon", date: "Coming Soon" },
-      { label: "Coming Soon", date: "Coming Soon" },
-      { label: "Coming Soon", date: "Coming Soon" },
-    ],
-  },
-  {
-    id: 5,
-    tag: "Event 101",
-    title: "TECHNO-ग्राम",
-    subtitle: "FOR THE VILLAGE",
-    description: "In the quiet of the rural heartland, engineering becomes a lifeline. From the soil to the circuit, only the solutions that bridge the gap between innovation and reality will endure",
-    rating: null,
-    genre: null,
-    age: null,
-    mainImage: "/techno.png",
-    registerLink: "https://tally.so/r/kdOyPj",
-    ruleBookLink: "https://drive.google.com/file/d/18ZKeK2LkSA0rxO0VIGGPQ-I6Uo45OaC9/view?usp=sharing",
-    timeline: [
-      { label: "Registrations", date: "Coming Soon" },
-      { label: "Coming Soon", date: "Coming Soon" },
-      { label: "Coming Soon", date: "Coming Soon" },
-      { label: "Coming Soon", date: "Coming Soon" },
-      { label: "Coming Soon", date: "Coming Soon" },
-    ],
-  },
-  {
-    id: 6,
-    tag: "Event 110",
-    title: "COMING SOON",
-    subtitle: "DARK SIGNAL",
-    description: "Something is coming… and it's not from this world. The gate is weakening. Stay ready.",
-    rating: null,
-    genre: null,
-    age: null,
-    mainImage: "/comingsoon.png",
-    registerLink: null,
-    ruleBookLink: null,
-    timeline: [
-      { label: "Registrations", date: "Coming Soon" },
-      { label: "Coming Soon", date: "Coming Soon" },
-      { label: "Coming Soon", date: "Coming Soon" },
-      { label: "Coming Soon", date: "Coming Soon" },
-      { label: "Coming Soon", date: "Coming Soon" },
-    ],
   },
 ];
 
@@ -319,7 +263,6 @@ export default function EventDescription() {
                 initial="enter" animate="center" exit="exit"
                 transition={{ duration: 0.3, ease: "easeOut", delay: 0.12 }}
                 className="flex items-center gap-3 flex-wrap">
-
                 {card.registerLink ? (
                   <a
                     href={card.registerLink}
@@ -352,7 +295,6 @@ export default function EventDescription() {
                     <span>&#9654;</span> Coming Soon
                   </button>
                 )}
-
                 {card.ruleBookLink ? (
                   <a
                     href={card.ruleBookLink}
@@ -388,36 +330,10 @@ export default function EventDescription() {
                 )}
               </motion.div>
             </AnimatePresence>
-
-            {(card.genre || card.age || card.rating) && (
-              <AnimatePresence mode="wait" custom={dir}>
-                <motion.div key={card.id + "m"} custom={dir} variants={slide}
-                  initial="enter" animate="center" exit="exit"
-                  transition={{ duration: 0.3, ease: "easeOut", delay: 0.16 }}
-                  className="flex items-center gap-3 flex-wrap"
-                  style={{
-                    color: "rgba(255,255,255,0.32)",
-                    fontFamily: "'Courier New', monospace",
-                    fontSize: "clamp(0.58rem, 1.6vw, 0.68rem)",
-                  }}>
-                  {card.genre && <span>{card.genre}</span>}
-                  {card.genre && card.age && <span className="w-px h-3 bg-white/15" />}
-                  {card.age && <span>{card.age}</span>}
-                  {(card.genre || card.age) && card.rating && <span className="w-px h-3 bg-white/15" />}
-                  {card.rating && (
-                    <span className="flex items-center gap-1">
-                      <span style={{ color: "#facc15" }}>&#9733;</span> {card.rating}
-                    </span>
-                  )}
-                </motion.div>
-              </AnimatePresence>
-            )}
           </div>
 
           <div className="flex-shrink-0 order-1 md:order-2 w-full md:w-auto">
-            {/* ── Desktop layout ── */}
             <div className="hidden md:flex gap-3 items-start">
-              {/* Square container matching 1080×1080 poster ratio */}
               <div
                 className="relative rounded-2xl overflow-hidden flex-shrink-0"
                 style={{
@@ -434,7 +350,6 @@ export default function EventDescription() {
                     exit={{ opacity: 0, scale: 0.97 }}
                     transition={{ duration: 0.36, ease: "easeOut" }}
                     className="absolute inset-0">
-                    {/* object-contain so full square poster is never cropped */}
                     <img
                       src={card.mainImage}
                       alt={card.title}
@@ -480,7 +395,6 @@ export default function EventDescription() {
               </div>
             </div>
 
-            {/* ── Mobile layout ── */}
             <div className="flex flex-col gap-2.5 md:hidden">
               <div
                 className="relative w-full rounded-xl overflow-hidden"
@@ -490,7 +404,6 @@ export default function EventDescription() {
                   boxShadow: "0 0 16px rgba(220,38,38,0.1), 0 10px 30px rgba(0,0,0,0.8)",
                 }}
               >
-                {/* FIX 2: tu_logo.png overlay completely removed from mobile main poster */}
                 <AnimatePresence mode="wait" custom={dir}>
                   <motion.div key={card.id + "mi"}
                     initial={{ opacity: 0 }}
@@ -498,7 +411,6 @@ export default function EventDescription() {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.32, ease: "easeOut" }}
                     className="absolute inset-0">
-                    {/* Mobile: object-contain ensures full 1080×1080 poster is never cropped */}
                     <img src={card.mainImage} alt={card.title}
                       className="w-full h-full object-contain"
                       style={{ filter: "brightness(0.92) saturate(0.95)" }} />
@@ -569,65 +481,65 @@ export default function EventDescription() {
               fontSize: "clamp(8px,1.8vw,10px)",
             }}
           >
-            &#9472;&#9472; Event Timeline
+            &#9472;&#9472; Full Schedule
           </p>
-
-          <AnimatePresence mode="wait" custom={dir}>
-            <motion.div
-              key={card.id + "tl"}
-              custom={dir}
-              variants={slide}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.3, ease: "easeOut", delay: 0.1 }}
-              className="relative"
-            >
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {SCHEDULE.map((slot, i) => (
               <div
-                className="absolute left-0 right-0 z-0"
-                style={{ top: "9px", height: "1px", background: "rgba(255,255,255,0.07)" }}
-              />
-              <div
-                className="grid"
-                style={{ gridTemplateColumns: `repeat(${card.timeline.length}, 1fr)` }}
+                key={i}
+                className="rounded-xl p-4"
+                style={{
+                  background: "rgba(255,255,255,0.02)",
+                  border: "1px solid rgba(255,255,255,0.07)",
+                }}
               >
-                {card.timeline.map((item, i) => (
-                  <div key={i} className="flex flex-col items-center gap-1 relative z-10">
-                    <div
-                      className="w-[18px] h-[18px] rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{
-                        background: "#0a0a0a",
-                        border: "1.5px solid rgba(220,38,38,0.42)",
-                        boxShadow: "0 0 5px rgba(220,38,38,0.15)",
-                      }}
-                    >
-                      <div className="w-1.5 h-1.5 rounded-full" style={{ background: "rgba(220,38,38,0.6)" }} />
+                <div className="flex items-center gap-2 mb-3">
+                  <span
+                    className="font-bold tracking-widest uppercase"
+                    style={{
+                      color: "#ef4444",
+                      fontFamily: "'Courier New', monospace",
+                      fontSize: "clamp(8px,2vw,10px)",
+                    }}
+                  >
+                    {slot.day}
+                  </span>
+                  <span
+                    className="rounded-full font-bold uppercase"
+                    style={{
+                      background: "rgba(220,38,38,0.1)",
+                      border: "1px solid rgba(220,38,38,0.3)",
+                      color: "rgba(220,38,38,0.7)",
+                      fontFamily: "'Courier New', monospace",
+                      fontSize: "clamp(6px,1.5vw,8px)",
+                      padding: "2px 8px",
+                    }}
+                  >
+                    {slot.half}
+                  </span>
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  {slot.events.map((ev, j) => (
+                    <div key={j} className="flex items-center gap-2">
+                      <div
+                        className="w-1 h-1 rounded-full flex-shrink-0"
+                        style={{ background: "rgba(220,38,38,0.55)" }}
+                      />
+                      <span
+                        style={{
+                          color: "rgba(255,255,255,0.5)",
+                          fontFamily: "'Courier New', monospace",
+                          fontSize: "clamp(8px,2vw,11px)",
+                        }}
+                      >
+                        {ev}
+                      </span>
                     </div>
-                    <span
-                      className="font-bold text-center"
-                      style={{
-                        color: "rgba(220,38,38,0.7)",
-                        fontFamily: "'Courier New', monospace",
-                        fontSize: "clamp(6px,1.6vw,9px)",
-                      }}
-                    >
-                      {item.date}
-                    </span>
-                    <span
-                      className="text-center leading-tight hidden sm:block"
-                      style={{
-                        color: "rgba(255,255,255,0.28)",
-                        fontFamily: "'Courier New', monospace",
-                        fontSize: "clamp(5px,1.3vw,7.5px)",
-                      }}
-                    >
-                      {item.label}
-                    </span>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </motion.div>
-          </AnimatePresence>
+            ))}
+          </div>
 
           <div className="mt-5">
             <span
@@ -642,7 +554,7 @@ export default function EventDescription() {
               }}
             >
               <span className="w-1.5 h-1.5 rounded-full animate-pulse flex-shrink-0" style={{ background: "#ef4444" }} />
-              Coming Soon &#8212; More Events Dropping
+              9th &#38; 10th May &#8212; Mark Your Calendar
             </span>
           </div>
         </div>
