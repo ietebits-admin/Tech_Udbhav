@@ -71,6 +71,28 @@ const EVENT_CARDS = [
     registerLink: "https://tally.so/r/jaGPWx",
     ruleBookLink: "https://drive.google.com/file/d/1le-WidGntfF-tNJkrSiaBoX_O8cxnMlP/view?usp=sharing",
   },
+  {
+    id: 5,
+    tag: "Event 101",
+    title: "TECHNO-ग्राम",
+    subtitle: "FOR THE VILLAGE",
+    description:
+      "In the quiet of the rural heartland, engineering becomes a lifeline. From the soil to the circuit, only the solutions that bridge the gap between innovation and reality will endure.",
+    mainImage: "/techno.png",
+    registerLink: "https://tally.so/r/kdOyPj",
+    ruleBookLink: "https://drive.google.com/file/d/18ZKeK2LkSA0rxO0VIGGPQ-I6Uo45OaC9/view?usp=sharing",
+  },
+  {
+    id: 6,
+    tag: "Event 110",
+    title: "COMING SOON",
+    subtitle: "DARK SIGNAL",
+    description:
+      "Something is coming… and it's not from this world. The gate is weakening. Stay ready.",
+    mainImage: "/comingsoon.png",
+    registerLink: null,
+    ruleBookLink: null,
+  },
 ];
 
 const PARTICLES = Array.from({ length: 14 }, (_, i) => ({
