@@ -17,7 +17,7 @@ const SCHEDULE = [
   {
     day: "10th May",
     half: "1st Half",
-    events: ["SensorSync Finals", "Tradein", "Cloak Coding"],
+    events: ["SensorSync Finals", "Cloak Coding"],
   },
   {
     day: "10th May",
