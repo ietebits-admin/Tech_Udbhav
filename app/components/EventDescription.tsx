@@ -496,9 +496,8 @@ export default function EventDescription() {
 
         <div className="mt-8 pt-6" style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
           <p
-            className="font-bold tracking-[0.3em] uppercase mb-5"
+            className="font-bold tracking-[0.3em] uppercase mb-5 text-gray-200"
             style={{
-              color: "rgba(255,255,255,0.26)",
               fontFamily: "'Courier New', monospace",
               fontSize: "clamp(8px,1.8vw,10px)",
             }}

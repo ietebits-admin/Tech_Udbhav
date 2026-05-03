@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useMemo } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import React, { useMemo, useState } from "react";
+import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import EventSlider from "./EventSlider";
 
 type ParticleProps = {
@@ -19,27 +19,27 @@ function Particle({ delay, x, duration, height }: ParticleProps) {
         left: x,
         bottom: "-10px",
         height: `${height}px`,
-        background:
-          "linear-gradient(to top, transparent, rgba(239, 68, 68, 0.55))",
+        background: "linear-gradient(to top, transparent, rgba(239, 68, 68, 0.55))",
         filter: "blur(0.5px)",
       }}
-      animate={{
-        y: [0, -520],
-        opacity: [0, 0.8, 0],
-        scaleX: [1, 1.25, 0.9],
-      }}
-      transition={{
-        duration,
-        delay,
-        repeat: Infinity,
-        ease: "linear",
-      }}
+      animate={{ y: [0, -520], opacity: [0, 0.8, 0], scaleX: [1, 1.25, 0.9] }}
+      transition={{ duration, delay, repeat: Infinity, ease: "linear" }}
     />
   );
 }
 
+const EVENTS = [
+  { id: 0, code: "001", title: "ROBO SOCCER", image: "/robosoccer.png" },
+  { id: 1, code: "010", title: "CLOAK CODING", image: "/cloakcoding.png" },
+  { id: 2, code: "011", title: "MINEFIELD RESCUE", image: "/minefield.png" },
+  { id: 3, code: "100", title: "SENSORSYNC", image: "/sensor.png" },
+  { id: 4, code: "101", title: "TECHNO-ग्राम", image: "/techno.png" },
+  { id: 5, code: "110", title: "COMING SOON", image: "/comingsoon.png" },
+];
+
 export default function About() {
   const reduceMotion = useReducedMotion();
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const particles = useMemo(
     () =>
@@ -49,10 +49,10 @@ export default function About() {
         duration: 5 + (i % 4),
         height: 16 + (i % 4) * 10,
       })),
-    [],
+    []
   );
 
-  const eventLabels = ["ROBO SOCCER", "CLOAK CODING", "MINEFIELD RESCUE", "SENSORSYNC", "TECHNO-ग्राम", "Event 110"];
+  const activeEvent = EVENTS[activeIndex];
 
   return (
     <section
@@ -69,30 +69,24 @@ export default function About() {
           backgroundSize: "56px 56px",
         }}
       />
-
       <div
         className="pointer-events-none absolute top-0 left-0 right-0 z-[1]"
         style={{
           height: "220px",
-          background:
-            "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(255,0,0,0.16) 0%, transparent 75%)",
+          background: "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(255,0,0,0.16) 0%, transparent 75%)",
         }}
       />
-
       <div
         className="pointer-events-none absolute bottom-0 left-0 right-0 z-[1]"
         style={{
           height: "220px",
-          background:
-            "radial-gradient(ellipse 70% 100% at 50% 100%, rgba(255,0,0,0.2) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse 70% 100% at 50% 100%, rgba(255,0,0,0.2) 0%, transparent 70%)",
         }}
       />
-
       <div
         className="pointer-events-none absolute inset-0 z-[1] opacity-[0.025]"
         style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
           backgroundSize: "180px 180px",
         }}
       />
@@ -169,29 +163,43 @@ export default function About() {
             <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-2">
               <div className="flex items-center gap-3">
                 <div
-                  className="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0"
+                  className="relative w-10 h-10 rounded-xl overflow-hidden flex-shrink-0"
                   style={{
                     border: "1.5px solid rgba(220,38,38,0.4)",
                     boxShadow: "0 0 10px rgba(220,38,38,0.15)",
                   }}
                 >
-                  <img
-                    src="./techno.png"
-                    alt="Technogram"
-                    className="w-full h-full object-cover"
-                    style={{ filter: "brightness(0.9) saturate(1.1)" }}
-                  />
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={activeEvent.image}
+                      src={activeEvent.image}
+                      alt={activeEvent.title}
+                      initial={{ opacity: 0, scale: 1.08 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.94 }}
+                      transition={{ duration: 0.28, ease: "easeOut" }}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      style={{ filter: "brightness(0.9) saturate(1.1)" }}
+                    />
+                  </AnimatePresence>
                 </div>
                 <div>
-                  <p
-                    className="font-black text-white leading-tight"
-                    style={{
-                      fontFamily: "'Georgia', serif",
-                      fontSize: "clamp(0.75rem, 2vw, 0.9rem)",
-                    }}
-                  >
-                    TECHNO-ग्राम
-                  </p>
+                  <AnimatePresence mode="wait">
+                    <motion.p
+                      key={activeEvent.title + "name"}
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.22, ease: "easeOut" }}
+                      className="font-black text-white leading-tight"
+                      style={{
+                        fontFamily: "'Georgia', serif",
+                        fontSize: "clamp(0.75rem, 2vw, 0.9rem)",
+                      }}
+                    >
+                      {activeEvent.title}
+                    </motion.p>
+                  </AnimatePresence>
                   <p
                     className="font-bold uppercase tracking-widest"
                     style={{
@@ -200,38 +208,38 @@ export default function About() {
                       fontSize: "clamp(6px, 1.4vw, 8px)",
                     }}
                   >
-                    Now Live &#8212; Register Open
+                    Now Live &#8212; Register Before It&apos;s Too Late
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center gap-2 flex-wrap">
-                {eventLabels.map((label, i) => (
+                {EVENTS.map((ev, i) => (
                   <span
                     key={i}
-                    className="inline-flex items-center gap-1.5 rounded-full font-bold uppercase"
+                    className="inline-flex items-center gap-1.5 rounded-full font-bold uppercase transition-all duration-300"
                     style={{
                       fontFamily: "'Courier New', monospace",
                       fontSize: "clamp(6px, 1.3vw, 8px)",
                       padding: "3px 8px",
-                      background: i === 0 ? "rgba(220,38,38,0.12)" : "rgba(255,255,255,0.04)",
-                      border: i === 0 ? "1px solid rgba(220,38,38,0.4)" : "1px solid rgba(255,255,255,0.08)",
-                      color: i === 0 ? "#ef4444" : "rgba(255,255,255,0.25)",
+                      background: i === activeIndex ? "rgba(220,38,38,0.12)" : "rgba(255,255,255,0.04)",
+                      border: i === activeIndex ? "1px solid rgba(220,38,38,0.4)" : "1px solid rgba(255,255,255,0.08)",
+                      color: i === activeIndex ? "#ef4444" : "rgba(255,255,255,0.25)",
                     }}
                   >
-                    {i === 0 && (
+                    {i === activeIndex && (
                       <span
                         className="w-1 h-1 rounded-full animate-pulse flex-shrink-0"
                         style={{ background: "#ef4444" }}
                       />
                     )}
-                    {label}
+                    {ev.title}
                   </span>
                 ))}
               </div>
             </div>
 
-            <EventSlider />
+            <EventSlider activeIndex={activeIndex} onActiveChange={setActiveIndex} />
           </div>
         </motion.div>
       </div>

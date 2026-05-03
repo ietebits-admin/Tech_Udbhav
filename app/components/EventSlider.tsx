@@ -40,12 +40,24 @@ function useScramble(value: string) {
   return display;
 }
 
-export default function EventSlider() {
-  const [active, setActive] = useState(0);
+type Props = {
+  activeIndex?: number;
+  onActiveChange?: (index: number) => void;
+};
+
+export default function EventSlider({ activeIndex, onActiveChange }: Props) {
+  const [internalActive, setInternalActive] = useState(0);
+  const active = activeIndex !== undefined ? activeIndex : internalActive;
+
+  const setActive = (i: number) => {
+    setInternalActive(i);
+    onActiveChange?.(i);
+  };
+
   const scrambled = useScramble(EVENTS[active].code);
 
-  const prev = () => setActive((p) => (p - 1 + EVENTS.length) % EVENTS.length);
-  const next = () => setActive((p) => (p + 1) % EVENTS.length);
+  const prev = () => setActive((active - 1 + EVENTS.length) % EVENTS.length);
+  const next = () => setActive((active + 1) % EVENTS.length);
 
   const getPos = (i: number) => {
     const diff = (i - active + EVENTS.length) % EVENTS.length;
