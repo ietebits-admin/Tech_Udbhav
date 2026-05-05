@@ -85,13 +85,13 @@ const EVENT_CARDS = [
   {
     id: 6,
     tag: "Event 110",
-    title: "COMING SOON",
-    subtitle: "DARK SIGNAL",
+    title: "REALM OF BETRAYAL",
+    subtitle: "LAST ONE STANDING",
     description:
-      "Something is coming… and it's not from this world. The gate is weakening. Stay ready.",
-    mainImage: "/comingsoon.png",
-    registerLink: null,
-    ruleBookLink: null,
+      "It’s a time when you can trust no one, as you’ll see your closest ones become the very people who betray you in this realm. Be careful whom you choose to save.",
+    mainImage: "/realm.png",
+    registerLink: "https://tally.so/r/7R4aN2",
+    ruleBookLink: "https://drive.google.com/file/d/1Z-Mu_7Nh-ku9H-p2cgb-4e-WToEsrMSr/view?usp=sharing",
   },
 ];
 

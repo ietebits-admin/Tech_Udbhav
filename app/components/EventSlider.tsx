@@ -10,7 +10,7 @@ const EVENTS = [
   { id: 2, code: "011", title: "MINEFIELD RESCUE", image: "/minefield.png" },
   { id: 3, code: "100", title: "SENSORSYNC", image: "/sensor.png" },
   { id: 4, code: "101", title: "TECHNO-ग्राम", image: "/techno.png" },
-  { id: 5, code: "110", title: "COMING SOON", image: "/comingsoon.png" },
+  { id: 5, code: "110", title: "REALM OF BETRAYAL", image: "/realm.png" },
 ];
 
 function useScramble(value: string) {
